@@ -16,8 +16,16 @@ const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
 app.use(
     cors({
         origin: (origin, callback) => {
-            // Allow requests with no origin
-            if (!origin || allowedOrigins.includes(origin)) {
+            // Allow requests with no origin (like curl, postman)
+            if (!origin) return callback(null, true);
+
+            // If '*' is specified in env, allow ALL origins dynamically
+            if (allowedOrigins.includes("*")) {
+                return callback(null, true);
+            }
+
+            // Otherwise, check for exact match
+            if (allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
                 callback(new Error(`CORS: origin ${origin} not allowed`));
