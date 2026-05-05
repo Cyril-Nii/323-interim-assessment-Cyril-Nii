@@ -1,7 +1,7 @@
 {
   "name": "323-interim-assessment-cyril-nii",
   "version": "1.0.0",
-  "description": "coinbase full-stack integration",
+  "description": "full-stack integration",
   "type": "module",
   "main": "server.js",
   "keywords": [
